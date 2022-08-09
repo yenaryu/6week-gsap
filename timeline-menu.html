@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none; color:inherit;}
+
+        .menu{position: fixed; top: 0; left: -100%; width: 100%; height: 100%;
+        background: #ccc; display: flex; align-items: center; justify-content: center;}/* 닫기 화면 전체 */
+        .menu li{font-size: 40px;} /* 메뉴1 */
+        .btn-close{position: absolute; top: 20px; right: 20px;} /* 닫기 버튼 */
+    </style>
+    
+    <a href="" class="btn-menu">메뉴</a>
+
+    <div class="menu">
+        <a href="" class="btn-close">닫기</a>
+        <ul class="gnb">
+            <li><a href="">메뉴1</a></li>
+            <li><a href="">메뉴1</a></li>
+            <li><a href="">메뉴1</a></li>
+            <li><a href="">메뉴1</a></li>
+            <li><a href="">메뉴1</a></li>
+            <li><a href="">메뉴1</a></li>
+        </ul>
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    const menu = gsap.timeline({})
+    menu.pause(); //화면 정지상태
+
+    menu.to('.menu',{left:0,}) //현재 menu시작점 -100 -> left0으로 화면에 꽉 찰수있게
+    .from('.menu li',{ //menu li 끝점->시작점으로 효과
+        opacity:0,
+        y:100, //y축의 수치의 강도 50px 
+        stagger:0.1 //분할 시간으로 각각 요소들이 0.1초씩 도출 
+    })
+
+    $('.btn-menu').click(function(e){ //메뉴버튼을 누르면
+        e.preventDefault();
+        menu.restart(); //재실행
+    })
+    $('.btn-close').click(function(e){ //닫기버튼을 누르면
+        e.preventDefault();
+        menu.reverse(); //반대로 실행
+    })
+</script>
+</body>
+</html>
